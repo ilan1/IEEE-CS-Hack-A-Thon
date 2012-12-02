@@ -16,7 +16,9 @@ public class Grid {
 		if(size % 2 > 0) spaces = new Object[size-1][size-1];
 		else spaces = new Object[size][size];
 	}
-	
+	public int size(){
+            return size;
+        }
 	public boolean checkPlayerPosition(Player player){
 	
 		if ((player.getX()<size && player.getX()>=0)
@@ -51,6 +53,17 @@ public class Grid {
 			System.out.println();
 		}
 	}
+        public String display(){
+            String ret="";
+            for(int i = 0; i <size;++i){
+                for(int j = 0; j<size;++j){
+                    if(spaces[i][j] != null && !(spaces[i][j] instanceof Player)) ret+="{1}";
+				else ret+="{ }";
+                }
+                ret+="\n";
+            }
+            return ret;
+        }
 	
 	
 	
