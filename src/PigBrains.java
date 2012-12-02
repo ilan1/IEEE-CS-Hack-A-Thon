@@ -4,7 +4,7 @@
  */
 
 
-import java.awt.event.MouseListener;
+import java.awt.Point;
 import javax.swing.JComponent;
 
 /**
@@ -13,13 +13,28 @@ import javax.swing.JComponent;
  */
 public class PigBrains extends javax.swing.JFrame {
     Grid gameGrid;
+    Player player;
+    int level=0;
     /**
      * Creates new form PigBrains
      */
     public PigBrains() {
         initComponents();
+        Point a = new Point(0,0);
+        player = new Player(a);
         gameGrid = new Grid();
-        setGameText(gameGrid.display());
+        gameGrid.fillSpace(a);
+        setGameText(gameGrid.display(player));
+    }
+    public void releaseTheBears(){
+        if(level==0){
+            Point a = new Point(3,3);
+            Bear berry = new Bear(true,false,false,false,false,a);
+            gameGrid.fillSpace(a);
+        }
+        if(level==1){
+            
+        }
     }
 
     /**
@@ -45,6 +60,7 @@ public class PigBrains extends javax.swing.JFrame {
         GameText = new javax.swing.JTextArea();
         TurnsText = new javax.swing.JTextField();
         LevelText = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         HelpMenu = new javax.swing.JMenuItem();
@@ -104,6 +120,13 @@ public class PigBrains extends javax.swing.JFrame {
         LevelText.setEditable(false);
         LevelText.setText("0");
 
+        jButton1.setText("Release The Bears");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("File");
 
         HelpMenu.setText("Help");
@@ -138,7 +161,7 @@ public class PigBrains extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -153,8 +176,10 @@ public class PigBrains extends javax.swing.JFrame {
                             .addComponent(moveLeftB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(moveRightB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(moveDownB, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(moveUpB, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(moveUpB, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -182,7 +207,9 @@ public class PigBrains extends javax.swing.JFrame {
                         .addComponent(moveLeftB)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(moveRightB)
-                        .addGap(167, 167, 167))))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)
+                        .addGap(126, 126, 126))))
         );
 
         pack();
@@ -217,6 +244,11 @@ public class PigBrains extends javax.swing.JFrame {
         setTurnText(incrementTurns(TurnsText.getText()));
         System.out.println("movedRight");
     }//GEN-LAST:event_moveRightBActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        releaseTheBears();
+    }//GEN-LAST:event_jButton1ActionPerformed
     public String incrementTurns(String a){
         int ac = Integer.parseInt(a);
         ++ac;
@@ -282,6 +314,7 @@ public class PigBrains extends javax.swing.JFrame {
     private javax.swing.JLabel Turns;
     private javax.swing.JTextField TurnsText;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
